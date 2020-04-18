@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CalculadoraFuncionando</string>
+    <string name="backspace"><![CDATA[<]]></string>
+</resources>
