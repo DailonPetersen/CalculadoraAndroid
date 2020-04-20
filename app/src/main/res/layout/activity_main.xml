@@ -1,45 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="0dp"
+    android:background="#013a59"
     android:orientation="vertical"
-    android:background="#4B0082"
+    android:padding="0dp"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#673AB7"
-        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:background="#045373"
+        android:orientation="vertical"
         android:padding="10dp">
+
+        <TextView
+            android:id="@+id/conta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="monospace"
+            android:gravity="bottom|center_horizontal"
+            android:textSize="36sp" />
 
         <EditText
             android:id="@+id/display"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#673AB7"
-            android:fontFamily="sans-serif-light"
-            android:gravity="right|center_vertical"
-            android:text="DIsahiodhsadio"
-            android:textAllCaps="false"
-            android:textSize="50sp"/>
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="bottom"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/all_numbers"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/linha05"
+            android:id="@+id/linha06"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -48,24 +60,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_backspace"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
                 android:text="@string/backspace"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/clean"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_clear"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
                 android:text="C"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:textSize="30sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,52 +88,52 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/none"
+                android:id="@+id/seven"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text="ff"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:text="7"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/eight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_numbers"
+                android:fadingEdge="horizontal"
+                android:fontFamily="sans-serif-black"
+                android:text="8"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/nine"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_numbers"
+                android:fadingEdge="horizontal"
+                android:fontFamily="sans-serif-black"
+                android:text="9"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/divide"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_others"
                 android:fontFamily="sans-serif-black"
                 android:text="/"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/multiply"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
-                android:fadingEdge="horizontal"
-                android:fontFamily="sans-serif-black"
-                android:text="x"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
-
-
-            <Button
-                android:id="@+id/some"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
-                android:fadingEdge="horizontal"
-                android:fontFamily="sans-serif-black"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -132,52 +144,53 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/seven"
+                android:id="@+id/four"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text="7"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:text="4"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
 
             <Button
-                android:id="@+id/eight"
+                android:id="@+id/five"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text="8"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:text="5"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
 
             <Button
-                android:id="@+id/nine"
+                android:id="@+id/six"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text="9"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:text="6"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
 
             <Button
-                android:id="@+id/minos"
+                android:id="@+id/multiply"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_others"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text="-"
+                android:text="x"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:textSize="30sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -188,51 +201,53 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/four"
-                android:layout_width="match_parent"
+                android:id="@+id/one"
+                android:layout_width="98dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
+
+                android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text="4"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:text="1"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
 
             <Button
-                android:id="@+id/five"
-                android:layout_width="match_parent"
+                android:id="@+id/two"
+                android:layout_width="98dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
+
+                android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text="5"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:text="2"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
 
             <Button
-                android:id="@+id/six"
-                android:layout_width="match_parent"
+                android:id="@+id/three"
+                android:layout_width="98dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
+
+                android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text="6"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:text="3"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
 
             <Button
-                android:id="@+id/equals"
+                android:id="@+id/minos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_others"
+                android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text="="
+                android:text="-"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:textSize="30sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -242,53 +257,54 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/one"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
-                android:fadingEdge="horizontal"
-                android:fontFamily="sans-serif-black"
-                android:text="1"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
-
-            <Button
-                android:id="@+id/two"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
-                android:fadingEdge="horizontal"
-                android:fontFamily="sans-serif-black"
-                android:text="2"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
-
-            <Button
-                android:id="@+id/three"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
-                android:fadingEdge="horizontal"
-                android:fontFamily="sans-serif-black"
-                android:text="3"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
 
             <Button
                 android:id="@+id/virgula"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
-                android:text=","
+                android:text="."
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/zero"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_numbers"
+                android:fadingEdge="horizontal"
+                android:fontFamily="sans-serif-black"
+                android:text="0"
+                android:textColor="#EEEEF1"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/equals"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_numbers"
+                android:fontFamily="sans-serif-black"
+                android:text="="
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/some"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_soma"
+                android:fadingEdge="horizontal"
+                android:fontFamily="sans-serif-black"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+
         </LinearLayout>
     </LinearLayout>
 

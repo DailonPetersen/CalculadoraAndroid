@@ -5,22 +5,57 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import java.io.BufferedReader;
-import java.util.ArrayList;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9;
-    Button btAdicao, btSubtracao, btDivisao, btMultiplicacao;
+    Button bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9, bt0;
+    Button btAdicao, btSubtracao, btDivisao, btMultiplicacao, btIgual;
     Button cleanAll, backspace, virgula;
     EditText display;
+    TextView conta;
+
+    Double firstValue = Double.NaN;
+    Double secondValue;
+
+    private char operation;
+
+    //funcao que calcula
+    private Double calculaValores() {
+        if( !Double.isNaN(firstValue) ){ //se meu primeiro valor nao é indefinido
+            secondValue = Double.parseDouble(display.getText().toString()); //setando o segundo valor
+
+            Double finalValue = 0.0;
+
+            switch (operation) {
+                case '+':
+                    finalValue = firstValue + secondValue;
+                    break;
+                case '-':
+                    finalValue = firstValue - secondValue;
+                    break;
+                case '*':
+                    finalValue = firstValue * secondValue;
+                    break;
+                case '/':
+                    finalValue = firstValue / secondValue;
+                    break;
+                default:
+                    display.setText("Opçao Inváida");
+            }
+            return finalValue;
+        } else{
+            firstValue = Double.parseDouble(display.getText().toString()); // se primeiro valor for NaN, então definimos ele aqui
+        }
+        return null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //instancia as variaveis usando os valores digitados
         bt1 = findViewById(R.id.one);
         bt2 = findViewById(R.id.two);
         bt3 = findViewById(R.id.three);
@@ -30,14 +65,18 @@ public class MainActivity extends AppCompatActivity {
         bt7 = findViewById(R.id.seven);
         bt8 = findViewById(R.id.eight);
         bt9 = findViewById(R.id.nine);
+        bt0 = findViewById(R.id.zero);
         btAdicao = findViewById(R.id.some);
         btSubtracao = findViewById(R.id.minos);
         btMultiplicacao = findViewById(R.id.multiply);
         btDivisao = findViewById(R.id.divide);
+        btIgual = findViewById(R.id.equals);
         display = findViewById(R.id.display);
+        conta = findViewById(R.id.conta);
         cleanAll = findViewById(R.id.clean);
         backspace = findViewById(R.id.backspace);
 
+        //evento quando o botao é clicado
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,20 +143,58 @@ public class MainActivity extends AppCompatActivity {
         btAdicao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                display.setText(display.getText() + "+");
+                calculaValores();
+                operation = '+';
+                conta.setText(firstValue + "+");
+                display.setText(null);
             }
         });
 
-        btAdicao.setOnClickListener(new View.OnClickListener() {
+        btSubtracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                calculaValores();
+                operation = '-';
+                conta.setText(firstValue + "-");
+                display.setText(null);
+            }
+        });
 
+        btMultiplicacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculaValores();
+                operation = '*';
+                conta.setText(firstValue + "*");
+                display.setText(null);
+            }
+        });
+
+        btDivisao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculaValores();
+                operation = '/';
+                conta.setText(firstValue + "/");
+                display.setText(null);
+            }
+        });
+
+        btIgual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Double finalValue = calculaValores();
+                operation = '0';
+                conta.setText(conta.getText().toString() + secondValue + " = " + finalValue);
+                firstValue = Double.NaN; //precisa voltar a ser indefinido
+                display.setText(null);
             }
         });
 
         cleanAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                conta.setText("");
                 display.setText("");
             }
         });
@@ -125,21 +202,11 @@ public class MainActivity extends AppCompatActivity {
         backspace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ArrayList<Object> textoAtual = new ArrayList<>();
-
-                String texto = display.toString();
-
-
-
-                   textoAtual.remove(-1);
-                   String novoTexto = textoAtual.toString();
-                   display.setText(novoTexto);
-
+                String txt = display.getText().toString();
+                txt = txt.substring(0, txt.length() - 1);
+                display.setText(txt);
             }
         });
-
-
 
     }
 
