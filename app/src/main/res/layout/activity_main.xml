@@ -6,6 +6,7 @@
     android:background="#013a59"
     android:orientation="vertical"
     android:padding="0dp"
+
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -44,14 +45,14 @@
         android:id="@+id/all_numbers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linha06"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -63,6 +64,7 @@
                 android:background="@drawable/gradient_backspace"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="backspace"
                 android:text="@string/backspace"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
@@ -75,9 +77,94 @@
                 android:background="@drawable/gradient_clear"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="cleanAll"
                 android:text="C"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linha05"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/fracao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_numbers"
+                android:fadingEdge="horizontal"
+                android:fontFamily="sans-serif-black"
+                android:onClick="Fracao"
+                android:text="1/x"
+                android:textAllCaps="false"
+                android:textColor="#EEEEF1"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/percent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_numbers"
+                android:fadingEdge="horizontal"
+                android:fontFamily="sans-serif-black"
+                android:onClick="Percent"
+                android:text="%"
+                android:textAllCaps="false"
+                android:textColor="#EEEEF1"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/negative"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+
+                android:background="@drawable/gradient_numbers"
+                android:fadingEdge="horizontal"
+                android:fontFamily="sans-serif-black"
+                android:onClick="MudaSinal"
+                android:text="-/+"
+                android:textAllCaps="false"
+                android:textColor="#EEEEF1"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/dobro"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_others"
+                android:fontFamily="sans-serif-black"
+                android:onClick="Exponecial"
+                android:text="x²"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/raiz"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_others"
+                android:fontFamily="sans-serif-black"
+                android:onClick="Raiz"
+                android:text="√x"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -95,6 +182,7 @@
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt7"
                 android:text="7"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
@@ -107,6 +195,7 @@
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt8"
                 android:text="8"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
@@ -119,6 +208,7 @@
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt9"
                 android:text="9"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
@@ -130,7 +220,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/gradient_others"
                 android:fontFamily="sans-serif-black"
+                android:onClick="Divisao"
                 android:text="/"
+                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
 
@@ -151,6 +243,7 @@
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt4"
                 android:text="4"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
@@ -163,6 +256,7 @@
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt5"
                 android:text="5"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
@@ -175,6 +269,7 @@
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt6"
                 android:text="6"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
@@ -187,7 +282,9 @@
                 android:background="@drawable/gradient_others"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="Multiplicacao"
                 android:text="x"
+                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
 
@@ -202,36 +299,39 @@
 
             <Button
                 android:id="@+id/one"
-                android:layout_width="98dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:layout_weight="1"
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt1"
                 android:text="1"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
 
             <Button
                 android:id="@+id/two"
-                android:layout_width="98dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:layout_weight="1"
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt2"
                 android:text="2"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
 
             <Button
                 android:id="@+id/three"
-                android:layout_width="98dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:layout_weight="1"
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt3"
                 android:text="3"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
@@ -244,7 +344,9 @@
                 android:background="@drawable/gradient_others"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="Subtracao"
                 android:text="-"
+                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
 
@@ -278,6 +380,7 @@
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="setBt0"
                 android:text="0"
                 android:textColor="#EEEEF1"
                 android:textSize="30sp" />
@@ -287,8 +390,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient_numbers"
+                android:background="@drawable/gradient_equal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="Igual"
                 android:text="="
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
@@ -298,9 +402,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/gradient_soma"
+                android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="Soma"
                 android:text="+"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />

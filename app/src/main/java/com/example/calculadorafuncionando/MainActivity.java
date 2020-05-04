@@ -1,53 +1,231 @@
 package com.example.calculadorafuncionando;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.Math;
 
 public class MainActivity extends AppCompatActivity {
 
     Button bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9, bt0;
     Button btAdicao, btSubtracao, btDivisao, btMultiplicacao, btIgual;
     Button cleanAll, backspace, virgula;
+    Button fracao, percent, negative, exponencial, raiz;
     EditText display;
     TextView conta;
 
-    Double firstValue = Double.NaN;
-    Double secondValue;
+    double firstValue, secondValue;
+    Double finalValue;
 
     private char operation;
 
-    //funcao que calcula
-    private Double calculaValores() {
+    //funcao que define os valores
+    private void defineValores() {
         if( !Double.isNaN(firstValue) ){ //se meu primeiro valor nao é indefinido
             secondValue = Double.parseDouble(display.getText().toString()); //setando o segundo valor
-
-            Double finalValue = 0.0;
-
-            switch (operation) {
-                case '+':
-                    finalValue = firstValue + secondValue;
-                    break;
-                case '-':
-                    finalValue = firstValue - secondValue;
-                    break;
-                case '*':
-                    finalValue = firstValue * secondValue;
-                    break;
-                case '/':
-                    finalValue = firstValue / secondValue;
-                    break;
-                default:
-                    display.setText("Opçao Inváida");
-            }
-            return finalValue;
-        } else{
+        } else {
             firstValue = Double.parseDouble(display.getText().toString()); // se primeiro valor for NaN, então definimos ele aqui
         }
-        return null;
+    }
+
+    //funcao que calcula baseado no valor atual da var 'operation'
+    private void CalculaValores(){
+        switch (operation) {
+            case '+':
+                finalValue = firstValue + secondValue;
+                break;
+            case '-':
+                finalValue = firstValue - secondValue;
+                break;
+            case '*':
+                finalValue = firstValue * secondValue;
+                break;
+            case '/':
+                finalValue = firstValue / secondValue;
+                break;
+            case 'f':
+                finalValue = ( 1 / firstValue);
+                break;
+            case 'n':
+                finalValue = (-1 * firstValue);
+                break;
+            case 'e':
+                finalValue = (firstValue*firstValue);
+                break;
+            case '√':
+                finalValue = Math.sqrt(firstValue);
+                break;
+            case ',':
+                finalValue = firstValue /10;
+                display.setText(finalValue + "." + secondValue);
+                break;
+            default:
+                String p = display.getText().toString();
+                firstValue = Double.parseDouble(p);
+                Toast toast = Toast.makeText(getApplicationContext(), "Operação indefinida", Toast.LENGTH_SHORT);
+                toast.show();
+        }
+    }
+
+    public void Ponto(View v){ // ainda nao sei como fazer
+
+    }
+
+    public void Percent(View v){ //fazer a conta aqui dentro
+        defineValores();
+        secondValue = ((firstValue * secondValue) /100 );
+        display.setText(String.valueOf(secondValue));
+    }
+
+    public void Raiz(View v){
+        defineValores();
+        operation = '√';
+        CalculaValores();
+        conta.setText(String.valueOf(finalValue));
+        display.setText(" ");
+    }
+
+    public void MudaSinal(View v){
+
+        if ( finalValue !=  null ){
+            finalValue = (-1*finalValue);
+            conta.setText(String.valueOf(finalValue));
+        }
+        else if (finalValue == null){
+            defineValores();
+            operation = 'n';
+            CalculaValores();
+        }
+        conta.setText(String.valueOf(finalValue));
+        display.setText("");
+    }
+
+    public void Exponecial(View v){
+        defineValores();
+        operation = 'e';
+        CalculaValores();
+        conta.setText(String.valueOf(finalValue));
+        display.setText(" ");
+    }
+
+    public void Fracao(View v){
+        defineValores();
+        operation = 'f';
+        CalculaValores();
+        conta.setText(Double.toString(finalValue));
+        display.setText("");
+    }
+
+    public void Soma(View v){
+        try { defineValores(); } catch (Exception e){ /*do nothing */ }
+        operation = '+';
+        conta.setText(firstValue + " +");
+        display.setText("");
+    }
+
+    public void Subtracao(View v){
+        try { defineValores(); } catch (Exception e){ /*do nothing */ }
+        operation = '-';
+        conta.setText(firstValue + " -");
+        display.setText("");
+    }
+
+    public void Multiplicacao(View v){
+        try { defineValores(); } catch (Exception e){ /*do nothing */ }
+        operation = '*';
+        conta.setText(firstValue + " *");
+        display.setText("");
+    }
+
+    public void Divisao(View v){
+        try { defineValores(); } catch (Exception e){ /*do nothing */ }
+        operation = '/';
+        conta.setText(firstValue + " /");
+        display.setText("");
+    }
+
+    public void Igual(View v){
+        try{
+            defineValores();
+            CalculaValores();
+            conta.setText(String.valueOf(finalValue));
+            display.setText(" ");
+        } catch (Exception e){
+            System.out.print(e);
+            Toast t = Toast.makeText(getApplicationContext(), "Clique no C para calcular novamente", Toast.LENGTH_LONG);
+            t.show();
+        }
+        operation = ' ';
+        firstValue = finalValue;
+    }
+
+    public void cleanAll(View v){
+        operation = ' ';
+        firstValue = Double.NaN;
+        finalValue = null;
+        if ( conta.getText() ==  null){
+            Toast t = Toast.makeText(getApplicationContext(), "A calculadora está limpa!", Toast.LENGTH_SHORT);
+            t.show();
+        }
+        conta.setText("");
+        display.clearComposingText();
+    }
+
+    public void backspace(View v){
+        try {
+            String txt = display.getText().toString();
+            txt = txt.substring(0, txt.length() - 1);
+            display.setText(txt);
+        } catch (Exception e){
+            Toast t = Toast.makeText(getApplicationContext(), "Clique no C para calcular novamente", Toast.LENGTH_SHORT);
+            t.show();
+            System.out.printf(String.valueOf(e));
+        }
+    }
+
+    public void setBt1(View b) {
+        display.setText(display.getText() + "1");
+    }
+    public void setBt2(View b) {
+        display.setText(display.getText() + "2");
+    }
+    public void setBt3(View b) {
+        display.setText(display.getText() + "3");
+    }
+    public void setBt4(View b) {
+        display.setText(display.getText() + "4");
+    }
+    public void setBt5(View b) {
+        display.setText(display.getText() + "5");
+    }
+    public void setBt6(View b) {
+        display.setText(display.getText() + "6");
+    }
+    public void setBt7(View b) {
+        display.setText(display.getText() + "7");
+    }
+    public void setBt8(View b) {
+        display.setText(display.getText() + "8");
+    }
+    public void setBt9(View b) {
+        display.setText(display.getText() + "9");
+    }
+    public void setBt0(View b) {
+        display.setText(display.getText() + "0");
     }
 
     @Override
@@ -66,150 +244,47 @@ public class MainActivity extends AppCompatActivity {
         bt8 = findViewById(R.id.eight);
         bt9 = findViewById(R.id.nine);
         bt0 = findViewById(R.id.zero);
-        btAdicao = findViewById(R.id.some);
-        btSubtracao = findViewById(R.id.minos);
-        btMultiplicacao = findViewById(R.id.multiply);
-        btDivisao = findViewById(R.id.divide);
-        btIgual = findViewById(R.id.equals);
         display = findViewById(R.id.display);
         conta = findViewById(R.id.conta);
         cleanAll = findViewById(R.id.clean);
         backspace = findViewById(R.id.backspace);
-
-        //evento quando o botao é clicado
-        bt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display.setText(display.getText() + "1");
+        virgula = findViewById(R.id.virgula);
+        firstValue = Double.NaN;
+        finalValue = null;
+        operation = ' ';
+        Double ValorRecuperado;
+        try {
+            FileInputStream Input = openFileInput("LastNumber.txt");
+            InputStreamReader isr = new InputStreamReader(Input);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            ValorRecuperado = Double.valueOf(br.readLine());
+            conta.setText(String.valueOf(ValorRecuperado));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+}
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FileOutputStream Output = null;
+        try {
+            Output = openFileOutput("LastNumber.txt", Context.MODE_PRIVATE);
+            Output.write(finalValue.toString().getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(Output != null){
+                try {
+                    Output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        });
-
-        bt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display.setText(display.getText() + "2");
-            }
-        });
-
-        bt3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display.setText(display.getText() + "3");
-            }
-        });
-
-        bt4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display.setText(display.getText() + "4");
-            }
-        });
-
-        bt5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display.setText(display.getText() + "5");
-            }
-        });
-
-        bt6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display.setText(display.getText() + "6");
-            }
-        });
-
-        bt7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display.setText(display.getText() + "7");
-            }
-        });
-
-        bt8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display.setText(display.getText() + "8");
-            }
-        });
-
-        bt9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display.setText(display.getText() + "9");
-            }
-        });
-
-        btAdicao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculaValores();
-                operation = '+';
-                conta.setText(firstValue + "+");
-                display.setText(null);
-            }
-        });
-
-        btSubtracao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculaValores();
-                operation = '-';
-                conta.setText(firstValue + "-");
-                display.setText(null);
-            }
-        });
-
-        btMultiplicacao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculaValores();
-                operation = '*';
-                conta.setText(firstValue + "*");
-                display.setText(null);
-            }
-        });
-
-        btDivisao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculaValores();
-                operation = '/';
-                conta.setText(firstValue + "/");
-                display.setText(null);
-            }
-        });
-
-        btIgual.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Double finalValue = calculaValores();
-                operation = '0';
-                conta.setText(conta.getText().toString() + secondValue + " = " + finalValue);
-                firstValue = Double.NaN; //precisa voltar a ser indefinido
-                display.setText(null);
-            }
-        });
-
-        cleanAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                conta.setText("");
-                display.setText("");
-            }
-        });
-
-        backspace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String txt = display.getText().toString();
-                txt = txt.substring(0, txt.length() - 1);
-                display.setText(txt);
-            }
-        });
-
+        }
     }
-
-
-
 }
