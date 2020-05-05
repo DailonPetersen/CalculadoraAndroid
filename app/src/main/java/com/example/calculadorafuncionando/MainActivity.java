@@ -245,22 +245,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //instancia as variaveis usando os valores digitados
-        bt1 = findViewById(R.id.one);
-        bt2 = findViewById(R.id.two);
-        bt3 = findViewById(R.id.three);
-        bt4 = findViewById(R.id.four);
-        bt5 = findViewById(R.id.five);
-        bt6 = findViewById(R.id.six);
-        bt7 = findViewById(R.id.seven);
-        bt8 = findViewById(R.id.eight);
-        bt9 = findViewById(R.id.nine);
-        bt0 = findViewById(R.id.zero);
+        //instancia os visores
+
         display = findViewById(R.id.display);
         conta = findViewById(R.id.conta);
-        cleanAll = findViewById(R.id.clean);
-        backspace = findViewById(R.id.backspace);
-        virgula = findViewById(R.id.virgula);
+
         firstValue = Double.NaN;
         finalValue = null;
         operation = ' ';
