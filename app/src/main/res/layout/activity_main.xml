@@ -368,6 +368,7 @@
                 android:background="@drawable/gradient_numbers"
                 android:fadingEdge="horizontal"
                 android:fontFamily="sans-serif-black"
+                android:onClick="Ponto"
                 android:text="."
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />

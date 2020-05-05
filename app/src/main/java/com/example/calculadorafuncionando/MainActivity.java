@@ -19,6 +19,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.Math;
 
+/* ********************** CALCULADORA PARA TRABRALHO DO GRAU A - PROG. SISTEMAS MÓVEIS(MOBILE) **********************
+   TO DO:
+    -Botão percent nao consigo utiliza-lo a partir de um resultado de um primeiro calculo. Preciso dividir o valor por 100
+
+*/
 public class MainActivity extends AppCompatActivity {
 
     Button bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9, bt0;
@@ -81,26 +86,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void Ponto(View v){ // ainda nao sei como fazer
-
+    public void Ponto(View v){
+        display.setText(display.getText() +".");
     }
 
     public void Percent(View v){ //fazer a conta aqui dentro
-        defineValores();
-        secondValue = ((firstValue * secondValue) /100 );
-        display.setText(String.valueOf(secondValue));
+        if ( finalValue != null){ //caso já tenha um resultado, quero calcular a partir dele
+            finalValue = (finalValue / 100);
+            conta.setText(String.valueOf(finalValue));
+        }else{
+            defineValores();
+            secondValue = ((firstValue * secondValue) /100 );
+            display.setText(String.valueOf(secondValue));
+        }
     }
 
-    public void Raiz(View v){
-        defineValores();
+        public void Raiz(View v){
+        try { defineValores(); } catch (Exception e){ /*do nothing */ }
         operation = '√';
         CalculaValores();
         conta.setText(String.valueOf(finalValue));
         display.setText(" ");
+        firstValue = finalValue;
     }
 
     public void MudaSinal(View v){
-
         if ( finalValue !=  null ){
             finalValue = (-1*finalValue);
             conta.setText(String.valueOf(finalValue));
@@ -115,19 +125,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Exponecial(View v){
-        defineValores();
+        try { defineValores(); } catch (Exception e){ /*do nothing */ }
         operation = 'e';
         CalculaValores();
         conta.setText(String.valueOf(finalValue));
         display.setText(" ");
+        firstValue = finalValue;
     }
 
     public void Fracao(View v){
-        defineValores();
+        try { defineValores(); } catch (Exception e){ /*do nothing */ }
         operation = 'f';
         CalculaValores();
         conta.setText(Double.toString(finalValue));
         display.setText("");
+        firstValue = finalValue;
     }
 
     public void Soma(View v){
@@ -182,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             t.show();
         }
         conta.setText("");
-        display.clearComposingText();
+        display.setText("");
     }
 
     public void backspace(View v){
@@ -228,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
         display.setText(display.getText() + "0");
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -252,14 +266,12 @@ public class MainActivity extends AppCompatActivity {
         firstValue = Double.NaN;
         finalValue = null;
         operation = ' ';
-        Double ValorRecuperado;
+
         try {
             FileInputStream Input = openFileInput("LastNumber.txt");
             InputStreamReader isr = new InputStreamReader(Input);
             BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            ValorRecuperado = Double.valueOf(br.readLine());
-            conta.setText(String.valueOf(ValorRecuperado));
+            conta.setText(br.readLine());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
