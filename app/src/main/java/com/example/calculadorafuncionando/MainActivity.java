@@ -21,7 +21,7 @@ import java.lang.Math;
 
 /* ********************** CALCULADORA PARA TRABRALHO DO GRAU A - PROG. SISTEMAS MÓVEIS(MOBILE) **********************
    TO DO:
-    -Botão percent nao consigo utiliza-lo a partir de um resultado de um primeiro calculo. Preciso dividir o valor por 100
+    -
 
 */
 public class MainActivity extends AppCompatActivity {
